@@ -1,11 +1,11 @@
 @echo off
-echo ================================
-echo Starting installer
-echo ================================
+@echo ================================
+@echo Starting installer
+@echo ================================
 
-echo ================================
-echo Setting up express server package installation
-echo ================================
+@echo ================================
+@echo Setting up express server package installation
+@echo ================================
 
 npm install express
 npm install body-parser
@@ -32,7 +32,7 @@ npm install --save-dev prettier eslint-config-prettier eslint-plugin-prettier
 npm install --save-dev husky lint-staged
 
 
-echo ================================
-echo Installation complete!
-echo Run server with: npx nodemon src\server.js
-echo ================================
+@echo ================================
+@echo Installation complete!
+@echo Run server with: npx nodemon src\server.js
+@echo ================================

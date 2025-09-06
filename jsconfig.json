@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "ESNext",
+    "baseUrl": "src",
+    "paths": {
+      "*": ["*"]
+    }
+  },
+  "exclude": ["node_modules"]
+}

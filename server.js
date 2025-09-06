@@ -18,6 +18,7 @@ import errorHandler from "./src/middleware/errorHandler.js";
 
 // Routes
 import testRoutes from "./src/test/testRoute.js";
+import authRoutes from "./src/routes/Auth.js";
 
 dotenv.config();
 
@@ -77,6 +78,7 @@ const startServer = async () => {
 
     // Routes
     app.use("/api/test", testRoutes);
+    app.use("/api/oauth", authRoutes);
 
 
     if (isDevelopment) {

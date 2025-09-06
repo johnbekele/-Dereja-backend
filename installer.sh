@@ -26,6 +26,7 @@ npm install socket.io
 npm install nodemailer
 npm install swagger-ui-express
 npm install yamljs
+npm install bcrypt
 npm install --save-dev jest supertest
 npm install --save-dev eslint eslint-config-airbnb-base eslint-plugin-import
 npm install --save-dev prettier eslint-config-prettier eslint-plugin-prettier

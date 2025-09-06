@@ -7,7 +7,7 @@ import { getAnalytics } from 'firebase/analytics';
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: 'AIzaSyA8eNZlxri60GTiZZbWRU_Tu2hw9-vaOIE',
+  apiKey: 'N/A',
   authDomain: 'book-memories-2d989.firebaseapp.com',
   projectId: 'book-memories-2d989',
   storageBucket: 'book-memories-2d989.firebasestorage.app',

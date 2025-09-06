@@ -30,8 +30,8 @@ const configurePassport = () => {
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         callbackURL:
           process.env.NODE_ENV === 'production'
-            ? `${process.env.MYDOMAIN}/api/auth/google/callback`
-            : 'http://localhost:3000/api/auth/google/callback',
+            ? `${process.env.MYDOMAIN}/api/oauth/google/callback`
+            : 'http://localhost:3000/api/oauth/google/callback',
         userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo',
         scope: ['profile', 'email'],
       },

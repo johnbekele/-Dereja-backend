@@ -1,19 +1,17 @@
-// import express from 'express'
-// import stopsController from '../controllers/stopsController.js'
-// import verifRole from '../middleware/verifyRole.js'
-// import { isAdmin } from 'middleware/AuthorizeRole.js'
+import express from 'express'
+import stopsController from '../controllers/stopsController.js'
+import verifRole from '../middleware/verifyRole.js'
+import verifyJWT from 'middleware/verifyJWT.js'
 
-// const router = express.Router()
-// const isAdmin = verifRole.isAdmin()
-// const isModerator = verifRole.isModerator()
+const router = express.Router()
 
-// // Public routes
-// router.get('/stops', stopsController.getAllStops)
-// router.get('/stops/:id', stopsController.getStopById)
+// Public routes
+router.get('/stops', verifyJWT, stopsController.getAllStops)
+router.get('/stops/:id', verifyJWT, stopsController.getStopById)
 
-// // Admin routes
-// router.post('/stops', isAdmin, stopsController.createStop)
-// router.put('/stops/:id', isAdmin, stopsController.updateStop)
-// router.delete('/stops/:id', isAdmin, stopsController.deleteStop)
+// Admin routes
+router.post('/stops', isAdmin, stopsController.createStop)
+router.put('/stops/:id', isAdmin, stopsController.updateStop)
+router.delete('/stops/:id', isAdmin, stopsController.deleteStop)
 
-// export default router
+export default router

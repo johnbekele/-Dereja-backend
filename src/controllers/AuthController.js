@@ -5,6 +5,8 @@ import User from '../models/User.js';
 import passport from 'passport';
 import logger from '../utils/logger.js';
 import mongoose from 'mongoose';
+import { validationResult } from "express-validator";
+
 
 dotenv.config();
 
@@ -14,6 +16,7 @@ const frontendURL =
   process.env.NODE_ENV === 'production'
     ? process.env.PROD_FRONTEND_URL
     : 'http://localhost:5173';
+
 
 
 const getMe = async (req, res) => {
@@ -35,42 +38,58 @@ const users = async (req, res) => {
   }
 };
 
+
+
 const createUser = async (req, res) => {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        errors: errors.array({ onlyFirstError: true }).map((err) => ({
+          field: err.param,
+          message: err.msg,
+        })),
+      });
+    }
+
+    
+
     const { username, firstname, lastname, email, phone, address, password } =
       req.body;
     logger.log(req.body);
 
-    // Check if the user already exists
+    // Check if user exists
     const userExists = await User.findOne({
-      $or: [{ username: username }, { email: email }],
+      $or: [{ username }, { email }],
     });
 
     if (userExists) {
-      return res.status(400).json({ message: 'User already exists' });
+      return res.status(400).json({ message: "User already exists" });
     }
 
-    // Hash the password - AWAIT IT HERE
+    // Hash password
     const hashedPassword = await bcrypt.hash(password, saltround);
 
-    // Create a new user in the database
+    // Create user
     const user = await User.create({
-      username: username, // This was missing in your original code
-      firstname: firstname,
-      lastname: lastname || '',
-      email: email,
-      phone: phone,
-      address: address,
-      password: hashedPassword, // Use the awaited hashed password
+      username,
+      firstname,
+      lastname: lastname || "",
+      email,
+      phone,
+      address,
+      password: hashedPassword,
     });
 
-    logger.log('User created ', user.toJSON());
-    res.status(201).json({ message: 'User created successfully', user });
+    logger.log("User created ", user.toJSON());
+    res.status(201).json({ message: "User created successfully", user });
   } catch (e) {
-    logger.log('Error creating user ', e);
-    res.status(500).json({ message: 'Error creating user' });
+   logger.log("Error creating user ", e);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
+
+
 
 const login = async (req, res) => {
   try {
